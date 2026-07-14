@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="CRM.BLL/CRM.BLL.csproj" />
+  <Project Path="CRM.DAL/CRM.DAL.csproj" />
+  <Project Path="CRM.PL/CRM.PL.csproj" />
+</Solution>
