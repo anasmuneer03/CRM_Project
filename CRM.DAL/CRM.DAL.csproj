@@ -19,7 +19,6 @@
     <Folder Include="DTO\Response\" />
     <Folder Include="DTO\Request\" />
     <Folder Include="Models\" />
-    <Folder Include="Repository\" />
   </ItemGroup>
 
 </Project>
