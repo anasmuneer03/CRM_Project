@@ -1,11 +1,12 @@
 
+using CRM.DAL.Utils;
 using CRM.PL.Extensions;
 
 namespace CRM.PL
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,11 @@ namespace CRM.PL
             //language
             builder.Services.AddLocalizationServices();
 
+            builder.Services.AddApplicationServices();
+
+            //Identity
+            builder.Services.AddIdentityServices();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -35,6 +41,17 @@ namespace CRM.PL
 
 
             app.MapControllers();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var seeders = services.GetServices<ISeedData>();
+
+                foreach (var seeder in seeders)
+                {
+                    await seeder.DataSeed();
+                }
+            }
 
             app.Run();
         }
