@@ -23,7 +23,7 @@ namespace CRM.DAL.Models
         Advertisement = 5,
         Other = 99
     }
-    public class Lead 
+    public class Lead :AuditableEntity
     {
         public int Id { get; set; }
         public string FullName { get; set; }

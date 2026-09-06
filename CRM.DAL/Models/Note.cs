@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CRM.DAL.Models
 {
-    public class Note
+    public class Note :AuditableEntity
     {
         public int Id { get; set; }
         public string Content { get; set; }

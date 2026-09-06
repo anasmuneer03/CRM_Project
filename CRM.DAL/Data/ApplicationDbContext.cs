@@ -1,7 +1,9 @@
 ﻿using CRM.DAL.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +12,7 @@ namespace CRM.DAL.Data
 {
     public class ApplicationDbContext :IdentityDbContext<ApplicationUser>
     {
+        IHttpContextAccessor _httpContextAccessor;
 
         public DbSet<Lead> Leads { get; set; }
         public DbSet<Customer> Customers { get; set; }
@@ -35,6 +38,24 @@ namespace CRM.DAL.Data
             builder.Entity<ApplicationUser>().ToTable("Users");
             builder.Entity<IdentityRole>().ToTable("Roles");
             builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
+
+            foreach (var entityType in builder.Model.GetEntityTypes())
+            {
+                if (typeof(AuditableEntity).IsAssignableFrom(entityType.ClrType))
+                {
+                    builder.Entity(entityType.ClrType)
+                        .HasOne(nameof(AuditableEntity.CreatedBy))
+                        .WithMany()
+                        .HasForeignKey(nameof(AuditableEntity.CreatedById))
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    builder.Entity(entityType.ClrType)
+                        .HasOne(nameof(AuditableEntity.UpdatedBy))
+                        .WithMany()
+                        .HasForeignKey(nameof(AuditableEntity.UpdatedById))
+                        .OnDelete(DeleteBehavior.Restrict);
+                }
+            }
 
             builder.Entity<Lead>()
                 .HasOne(l => l.ConvertedToCustomer)
@@ -187,28 +208,28 @@ namespace CRM.DAL.Data
 
         }
 
-        //public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        //{
-        //    if (_httpContextAccessor.HttpContext != null)
-        //    {
-        //        var entries = ChangeTracker.Entries<AuditableEntity>();
-        //        var currentUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //        foreach (var entry in entries)
-        //        {
-        //            if (entry.State == EntityState.Added)
-        //            {
-        //                entry.Property(x => x.CreatedById).CurrentValue = currentUserId;
-        //                entry.Property(x => x.CreatedOn).CurrentValue = DateTime.UtcNow;
-        //            }
-        //            if (entry.State == EntityState.Modified)
-        //            {
-        //                entry.Property(x => x.UpdatedById).CurrentValue = currentUserId;
-        //                entry.Property(x => x.UpdatedOn).CurrentValue = DateTime.UtcNow;
-        //            }
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            if (_httpContextAccessor.HttpContext != null)
+            {
+                var entries = ChangeTracker.Entries<AuditableEntity>();
+                var currentUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                foreach (var entry in entries)
+                {
+                    if (entry.State == EntityState.Added)
+                    {
+                        entry.Property(x => x.CreatedById).CurrentValue = currentUserId;
+                        entry.Property(x => x.CreatedOn).CurrentValue = DateTime.UtcNow;
+                    }
+                    if (entry.State == EntityState.Modified)
+                    {
+                        entry.Property(x => x.UpdatedById).CurrentValue = currentUserId;
+                        entry.Property(x => x.UpdatedOn).CurrentValue = DateTime.UtcNow;
+                    }
 
-        //        }
-        //    }
-        //    return base.SaveChangesAsync(cancellationToken);
-        //}
+                }
+            }
+            return base.SaveChangesAsync(cancellationToken);
+        }
     }
 }

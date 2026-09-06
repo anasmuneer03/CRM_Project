@@ -12,7 +12,7 @@ namespace CRM.DAL.Models
         InActive = 2,
         Churned = 3
     }
-    public class Customer 
+    public class Customer :AuditableEntity
     {
         public int Id { get; set; }
         public string FullName { get; set; }

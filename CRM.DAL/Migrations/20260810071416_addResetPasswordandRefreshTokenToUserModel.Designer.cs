@@ -4,6 +4,7 @@ using CRM.DAL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CRM.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260810071416_addResetPasswordandRefreshTokenToUserModel")]
+    partial class addResetPasswordandRefreshTokenToUserModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,13 +36,6 @@ namespace CRM.DAL.Migrations
                     b.Property<DateTime>("ActivityDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CreatedById")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
@@ -47,9 +43,6 @@ namespace CRM.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("DurationMinutes")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EntityStatus")
                         .HasColumnType("int");
 
                     b.Property<int?>("LeadId")
@@ -65,23 +58,13 @@ namespace CRM.DAL.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CreatedById");
 
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("LeadId");
 
                     b.HasIndex("OpportunityId");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Activities");
                 });
@@ -181,21 +164,11 @@ namespace CRM.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CreatedById")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EntityStatus")
-                        .HasColumnType("int");
 
                     b.Property<string>("FileName")
                         .IsRequired()
@@ -211,23 +184,13 @@ namespace CRM.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CreatedById");
 
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("LeadId");
 
                     b.HasIndex("OpportunityId");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Attachments");
                 });
@@ -246,13 +209,6 @@ namespace CRM.DAL.Migrations
                     b.Property<DateTime?>("CompletedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CreatedById")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
@@ -261,9 +217,6 @@ namespace CRM.DAL.Migrations
 
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("EntityStatus")
-                        .HasColumnType("int");
 
                     b.Property<int?>("LeadId")
                         .HasColumnType("int");
@@ -281,25 +234,15 @@ namespace CRM.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AssignedToId");
-
-                    b.HasIndex("CreatedById");
 
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("LeadId");
 
                     b.HasIndex("OpportunityId");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Tasks");
                 });
@@ -325,22 +268,12 @@ namespace CRM.DAL.Migrations
                     b.Property<int?>("ConvertedFromLeadId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CreatedById")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("CustomerStatus")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EntityStatus")
-                        .HasColumnType("int");
 
                     b.Property<string>("FullName")
                         .IsRequired()
@@ -350,19 +283,9 @@ namespace CRM.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AssignedAgentId");
-
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Customers");
                 });
@@ -387,19 +310,9 @@ namespace CRM.DAL.Migrations
                     b.Property<int?>("ConvertedToCustomerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CreatedById")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EntityStatus")
-                        .HasColumnType("int");
 
                     b.Property<string>("FullName")
                         .IsRequired()
@@ -417,12 +330,6 @@ namespace CRM.DAL.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AssignedAgentId");
@@ -430,10 +337,6 @@ namespace CRM.DAL.Migrations
                     b.HasIndex("ConvertedToCustomerId")
                         .IsUnique()
                         .HasFilter("[ConvertedToCustomerId] IS NOT NULL");
-
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Leads");
                 });
@@ -450,17 +353,7 @@ namespace CRM.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CreatedById")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<int?>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EntityStatus")
                         .HasColumnType("int");
 
                     b.Property<int?>("LeadId")
@@ -469,23 +362,13 @@ namespace CRM.DAL.Migrations
                     b.Property<int?>("OpportunityId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("CreatedById");
 
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("LeadId");
 
                     b.HasIndex("OpportunityId");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Notes");
                 });
@@ -543,13 +426,6 @@ namespace CRM.DAL.Migrations
                     b.Property<string>("AssignedAgentId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CreatedById")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("Currancy")
                         .HasColumnType("int");
 
@@ -558,9 +434,6 @@ namespace CRM.DAL.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EntityStatus")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ExpectedClosedDate")
                         .HasColumnType("datetime2");
@@ -578,21 +451,11 @@ namespace CRM.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AssignedAgentId");
 
-                    b.HasIndex("CreatedById");
-
                     b.HasIndex("CustomerId");
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Opportunities");
                 });
@@ -611,20 +474,10 @@ namespace CRM.DAL.Migrations
                     b.Property<string>("AssignedAgentId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CreatedById")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("Currancy")
                         .HasColumnType("int");
 
                     b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EntityStatus")
                         .HasColumnType("int");
 
                     b.Property<int>("OpportunityId")
@@ -633,24 +486,14 @@ namespace CRM.DAL.Migrations
                     b.Property<DateTime>("SaleDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime?>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AssignedAgentId");
-
-                    b.HasIndex("CreatedById");
 
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("OpportunityId")
                         .IsUnique();
-
-                    b.HasIndex("UpdatedById");
 
                     b.ToTable("Sales");
                 });
@@ -790,12 +633,6 @@ namespace CRM.DAL.Migrations
 
             modelBuilder.Entity("CRM.DAL.Models.Activity", b =>
                 {
-                    b.HasOne("CRM.DAL.Models.ApplicationUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("CRM.DAL.Models.Customer", "Customer")
                         .WithMany("Activities")
                         .HasForeignKey("CustomerId")
@@ -811,30 +648,15 @@ namespace CRM.DAL.Migrations
                         .HasForeignKey("OpportunityId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CRM.DAL.Models.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("CreatedBy");
-
                     b.Navigation("Customer");
 
                     b.Navigation("Lead");
 
                     b.Navigation("Opportunity");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("CRM.DAL.Models.Attachment", b =>
                 {
-                    b.HasOne("CRM.DAL.Models.ApplicationUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("CRM.DAL.Models.Customer", "Customer")
                         .WithMany("Attachments")
                         .HasForeignKey("CustomerId")
@@ -850,20 +672,11 @@ namespace CRM.DAL.Migrations
                         .HasForeignKey("OpportunityId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CRM.DAL.Models.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("CreatedBy");
-
                     b.Navigation("Customer");
 
                     b.Navigation("Lead");
 
                     b.Navigation("Opportunity");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("CRM.DAL.Models.CrmTask", b =>
@@ -873,12 +686,6 @@ namespace CRM.DAL.Migrations
                         .HasForeignKey("AssignedToId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("CRM.DAL.Models.ApplicationUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("CRM.DAL.Models.Customer", "Customer")
                         .WithMany("CrmTasks")
                         .HasForeignKey("CustomerId")
@@ -894,22 +701,13 @@ namespace CRM.DAL.Migrations
                         .HasForeignKey("OpportunityId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CRM.DAL.Models.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.Navigation("AssignedTo");
-
-                    b.Navigation("CreatedBy");
 
                     b.Navigation("Customer");
 
                     b.Navigation("Lead");
 
                     b.Navigation("Opportunity");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("CRM.DAL.Models.Customer", b =>
@@ -919,22 +717,7 @@ namespace CRM.DAL.Migrations
                         .HasForeignKey("AssignedAgentId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("CRM.DAL.Models.ApplicationUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("CRM.DAL.Models.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.Navigation("AssignedAgent");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("CRM.DAL.Models.Lead", b =>
@@ -949,34 +732,13 @@ namespace CRM.DAL.Migrations
                         .HasForeignKey("CRM.DAL.Models.Lead", "ConvertedToCustomerId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("CRM.DAL.Models.ApplicationUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("CRM.DAL.Models.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.Navigation("AssignedAgent");
 
                     b.Navigation("ConvertedToCustomer");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("CRM.DAL.Models.Note", b =>
                 {
-                    b.HasOne("CRM.DAL.Models.ApplicationUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("CRM.DAL.Models.Customer", "Customer")
                         .WithMany("Notes")
                         .HasForeignKey("CustomerId")
@@ -992,20 +754,11 @@ namespace CRM.DAL.Migrations
                         .HasForeignKey("OpportunityId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CRM.DAL.Models.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("CreatedBy");
-
                     b.Navigation("Customer");
 
                     b.Navigation("Lead");
 
                     b.Navigation("Opportunity");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("CRM.DAL.Models.Notification", b =>
@@ -1026,30 +779,15 @@ namespace CRM.DAL.Migrations
                         .HasForeignKey("AssignedAgentId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("CRM.DAL.Models.ApplicationUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("CRM.DAL.Models.Customer", "Customer")
                         .WithMany("Opportunities")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("CRM.DAL.Models.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.Navigation("AssignedAgent");
 
-                    b.Navigation("CreatedBy");
-
                     b.Navigation("Customer");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("CRM.DAL.Models.Sale", b =>
@@ -1058,12 +796,6 @@ namespace CRM.DAL.Migrations
                         .WithMany("AssignedSales")
                         .HasForeignKey("AssignedAgentId")
                         .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("CRM.DAL.Models.ApplicationUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
 
                     b.HasOne("CRM.DAL.Models.Customer", "Customer")
                         .WithMany("Sales")
@@ -1077,20 +809,11 @@ namespace CRM.DAL.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("CRM.DAL.Models.ApplicationUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.Navigation("AssignedAgent");
-
-                    b.Navigation("CreatedBy");
 
                     b.Navigation("Customer");
 
                     b.Navigation("Opportunity");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

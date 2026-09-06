@@ -15,7 +15,7 @@ namespace CRM.DAL.Models
         WhatsApp = 5,
         Other = 99
     }
-    public class Activity
+    public class Activity :AuditableEntity
     {
         public int Id { get; set; }
         public string Subject { get; set; }

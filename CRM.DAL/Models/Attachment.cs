@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CRM.DAL.Models
 {
-    public class Attachment
+    public class Attachment :AuditableEntity
     {
         public int Id { get; set; }
         public string FileName { get; set; }

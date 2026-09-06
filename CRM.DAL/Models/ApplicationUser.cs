@@ -12,6 +12,10 @@ namespace CRM.DAL.Models
         public string FullName { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public string? ResetPasswordCode { get; set; }
+        public DateTime? ResetPasswordCodeExpiry { get; set; }
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpiry { get; set; }
         public ICollection<Lead> AssignedLeads { get; set; } = new List<Lead>();
         public ICollection<Customer> AssignedCustomers { get; set; } = new List<Customer>();
         public ICollection<Opportunity> AssignedOpportunities { get; set; } = new List<Opportunity>();

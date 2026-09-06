@@ -1,4 +1,5 @@
-﻿using CRM.BLL.Services.Leads;
+﻿using CRM.BLL.Service.Authentication;
+using CRM.BLL.Service.Email;
 using CRM.DAL.Repository;
 using CRM.DAL.Utils;
 
@@ -10,6 +11,8 @@ namespace CRM.PL.Extensions
         {
             services.AddScoped<IUnitOfWork,UnitOfWork>();
             services.AddScoped<ISeedData, RoleSeedData>();
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
             return services;
         }
     }

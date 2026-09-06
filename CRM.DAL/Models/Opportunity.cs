@@ -22,7 +22,7 @@ namespace CRM.DAL.Models
         JOD = 1,
         USD = 2
     }
-    public class Opportunity
+    public class Opportunity : AuditableEntity
     {
         public int Id { get; set; }
         public string Title { get; set; }

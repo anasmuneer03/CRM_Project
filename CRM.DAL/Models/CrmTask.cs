@@ -19,7 +19,7 @@ namespace CRM.DAL.Models
         Medium = 2,
         High = 3
     }
-    public class CrmTask
+    public class CrmTask :AuditableEntity
     {
         public int Id { get; set; }
         public string Title { get; set; }

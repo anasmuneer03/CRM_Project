@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CRM.DAL.Models
 {
-    public class Sale
+    public class Sale :AuditableEntity
     {
         public int Id { get; set; }
         public decimal Amount { get; set; }
