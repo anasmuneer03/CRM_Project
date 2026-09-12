@@ -20,7 +20,7 @@ namespace CRM.DAL.Models
         public string Phone { get; set; }
         public string? CompanyName { get; set; }
         public string Address { get; set; }
-        public CustomerStatusEnum CustomerStatus { get; set; }
+        public CustomerStatusEnum CustomerStatus { get; set; } = CustomerStatusEnum.Active;
         public int? ConvertedFromLeadId { get; set; }
         public Lead? ConvertedFromLead { get; set; }
         public string? AssignedAgentId { get; set; }

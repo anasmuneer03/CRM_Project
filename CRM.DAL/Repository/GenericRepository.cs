@@ -42,7 +42,7 @@ namespace CRM.DAL.Repository
             return entity;
         }
 
-        public void DeleteAsync(T entity)
+        public void Delete(T entity)
         {
             _context.Remove(entity);
         }
@@ -52,7 +52,7 @@ namespace CRM.DAL.Repository
             _context.RemoveRange(entities);
         }
 
-        public void UpdateAsync(T entity)
+        public void Update(T entity)
         {
             _context.Update(entity);
         }

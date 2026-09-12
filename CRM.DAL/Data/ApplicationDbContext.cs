@@ -26,9 +26,11 @@ namespace CRM.DAL.Data
         public DbSet<Attachment> Attachments { get; set; }
         public DbSet<Notification> Notifications { get; set; }
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options,
+            IHttpContextAccessor httpContextAccessor
             )
         : base(options) { 
+            _httpContextAccessor = httpContextAccessor;
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

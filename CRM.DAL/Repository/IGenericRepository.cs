@@ -13,9 +13,9 @@ namespace CRM.DAL.Repository
         IQueryable<T> GetQueryable(Expression<Func<T, bool>>? filter = null, string[]? includes = null);
         Task<T?> GetOneAsync(Expression<Func<T, bool>> filter, string[]? includes = null);
         Task<T> CreateAsync(T entity);
-        void UpdateAsync(T entity);
+        void Update(T entity);
         void UpdateRangeAsync(List<T> entities);
-        void DeleteAsync(T entity);
+        void Delete(T entity);
         void DeleteRangeAsync(List<T> entities);
     }
 }
