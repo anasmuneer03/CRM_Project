@@ -21,6 +21,7 @@ namespace CRM.DAL.Models
         public string? CompanyName { get; set; }
         public string Address { get; set; }
         public CustomerStatusEnum CustomerStatus { get; set; } = CustomerStatusEnum.Active;
+        public string? ChurnReason { get; set; }
         public int? ConvertedFromLeadId { get; set; }
         public Lead? ConvertedFromLead { get; set; }
         public string? AssignedAgentId { get; set; }

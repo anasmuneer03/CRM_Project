@@ -23,9 +23,7 @@ namespace CRM.BLL.Service.Leads
         }
         public async Task<List<LeadResponse>> GetAllLeads()
         {
-            var leads = await _uow.Repository<Lead>().GetAllAsync(
-                filter: l => l.EntityStatus == EntityStatusEnum.Active
-                ); 
+            var leads = await _uow.Repository<Lead>().GetAllAsync(); 
             return leads.Adapt<List<LeadResponse>>();
         }
 

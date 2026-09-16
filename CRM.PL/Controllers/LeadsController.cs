@@ -35,7 +35,7 @@ namespace CRM.PL.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetOne(int id)
         {
-            var lead = await _leadService.GetLead(l => l.Id == id && l.EntityStatus == EntityStatusEnum.Active);
+            var lead = await _leadService.GetLead(l => l.Id == id);
             if (lead is null)
                 return NotFoundResponse(_stringLocalizer["LeadNotFound"].Value);
             return SuccessResponse(lead, _stringLocalizer["Success"].Value);

@@ -1,4 +1,5 @@
 ﻿using CRM.DAL.Data;
+using CRM.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,21 +20,24 @@ namespace CRM.DAL.Repository
             _context = context;
         }
 
-        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter, string[]? includes = null)
+        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter,
+            string[]? includes = null, bool includeDeleted = false)
         {
-            var query = BuildQuery(filter, includes);
+            var query = BuildQuery(filter, includes, includeDeleted);
             return await query.ToListAsync();
         }
 
-        public IQueryable<T> GetQueryable(Expression<Func<T, bool>>? filter, string[]? includes = null)
+        public IQueryable<T> GetQueryable(Expression<Func<T, bool>>? filter, string[]? includes = null,
+            bool includeDeleted = false)
         {
-            return BuildQuery(filter, includes);
+            return BuildQuery(filter, includes, includeDeleted);
 
         }
 
-        public async Task<T?> GetOneAsync(Expression<Func<T, bool>> filter, string[]? includes = null)
+        public async Task<T?> GetOneAsync(Expression<Func<T, bool>> filter, string[]? includes = null,
+            bool includeDeleted = false)
         {
-            var query = BuildQuery(null, includes);
+            var query = BuildQuery(null, includes, includeDeleted);
             return await query.FirstOrDefaultAsync(filter);
         }
         public async Task<T> CreateAsync(T entity)
@@ -61,9 +65,16 @@ namespace CRM.DAL.Repository
         {
             _context.UpdateRange(entities);
         }
-        private IQueryable<T> BuildQuery(Expression<Func<T,bool>>? filter,string[]? includes)
+        private IQueryable<T> BuildQuery(Expression<Func<T,bool>>? filter,string[]? includes,
+            bool includeDeleted = false)
         {
-            var query = _context.Set<T>().AsNoTracking();
+            IQueryable<T> query = _context.Set<T>().AsNoTracking();
+
+            if (!includeDeleted && typeof(AuditableEntity).IsAssignableFrom(typeof(T)))
+            {
+                query = query.Where(e => EF.Property<EntityStatusEnum>(e, "EntityStatus") != EntityStatusEnum.InActive);
+            }
+
             if (filter != null)
                 query = query.Where(filter);
           
