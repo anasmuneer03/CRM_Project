@@ -23,7 +23,8 @@ namespace CRM.BLL.Service.Leads
         }
         public async Task<List<LeadResponse>> GetAllLeads()
         {
-            var leads = await _uow.Repository<Lead>().GetAllAsync(); 
+            var leads = await _uow.Repository<Lead>().GetAllAsync(
+                includes: new string[] {nameof(Lead.AssignedAgent)}); 
             return leads.Adapt<List<LeadResponse>>();
         }
 

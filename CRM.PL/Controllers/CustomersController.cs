@@ -44,7 +44,6 @@ namespace CRM.PL.Controllers
         {
             var created = await _customerService.CreateCustomer(request);
             return CreatedResponse(nameof(GetOne), new { id = created.Id }, created, _stringLocalizer["Created"].Value);
-
         }
 
         [HttpPatch("{id:int}")]

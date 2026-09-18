@@ -1,4 +1,5 @@
 
+using CRM.BLL.Mapping;
 using CRM.DAL.Utils;
 using CRM.PL.Extensions;
 
@@ -29,6 +30,8 @@ namespace CRM.PL
 
             //JWT Authentication
             builder.Services.AddJwtAuthenticationServices(builder.Configuration);
+
+            MapsterConfig.MapsterConfigRegister();
 
             var app = builder.Build();
 

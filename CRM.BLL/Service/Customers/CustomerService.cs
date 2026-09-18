@@ -25,7 +25,7 @@ namespace CRM.BLL.Service.Customers
         public async Task<List<CustomerResponse>> GetAllCustomers()
         {
             var customers = await _uow.Repository<Customer>().GetAllAsync(
-                includes : new string[] {nameof(Customer.Opportunities)});
+                includes : new string[] {nameof(Customer.AssignedAgent)});
             return customers.Adapt<List<CustomerResponse>>();
         }
 

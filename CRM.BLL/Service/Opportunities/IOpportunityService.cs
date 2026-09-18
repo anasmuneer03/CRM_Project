@@ -16,11 +16,11 @@ namespace CRM.BLL.Service.Opportunities
     public interface IOpportunityService
     {
         Task<List<OpportunityResponse>> GetAllLOpportunities();
-        Task<OpportunityResponse?> GetOpportunity(Expression<Func<Lead, bool>> filter);
+        Task<OpportunityResponse?> GetOpportunity(Expression<Func<Opportunity, bool>> filter);
         Task<OpportunityResponse> CreateOpportunity(OpportunityRequest request);
-        Task<ServiceResult<LeadResponse>> UpdateOpportunity(int id, UpdateOpportunityRequest request);
-        Task<ServiceResult<bool>> UpdateOpportunityStatus(int id, UpdateOpportunityStatusRequest request);
+        Task<ServiceResult<OpportunityResponse>> UpdateOpportunity(int id, UpdateOpportunityRequest request);
+        Task<ServiceResult<bool>> UpdateOpportunityStage(int id, UpdateOpportunityStageRequest request);
+        Task<ServiceResult<CloseOpportunityAsWonResponse>> CloseOpportunityAsWon(int id);
         Task<ServiceResult<bool>> DeleteOpportunity(int id);
-
     }
 }
