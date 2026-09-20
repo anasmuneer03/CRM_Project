@@ -18,7 +18,7 @@ namespace CRM.DAL.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Opportunity> Opportunities { get; set; }
         public DbSet<Sale> Sales { get; set; }
-        //public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
         //public DbSet<Payment> Payments { get; set; }
         public DbSet<CrmTask> Tasks { get; set; }
         public DbSet<Activity> Activities { get; set; }
@@ -107,15 +107,15 @@ namespace CRM.DAL.Data
                 .HasForeignKey(s => s.CustomerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //builder.Entity<Invoice>()
-            //    .HasOne(i => i.Sale)
-            //    .WithMany(s => s.Invoices)
-            //    .HasForeignKey(i => i.SaleId)
-            //    .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Invoice>()
+                .HasOne(i => i.Sale)
+                .WithMany(s => s.Invoices)
+                .HasForeignKey(i => i.SaleId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            //builder.Entity<Invoice>()
-            //    .HasIndex(i => i.InvoiceNumber)
-            //    .IsUnique();
+            builder.Entity<Invoice>()
+                .HasIndex(i => i.InvoiceNumber)
+                .IsUnique();
 
             //builder.Entity<Payment>()
             //    .HasOne(p => p.Invoice)

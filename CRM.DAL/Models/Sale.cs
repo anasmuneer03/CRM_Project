@@ -18,6 +18,6 @@ namespace CRM.DAL.Models
         public Customer Customer { get; set; }
         public string? AssignedAgentId { get; set; }
         public ApplicationUser? AssignedAgent { get; set; }
-        //public ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
+        public ICollection<Invoice> Invoices { get; set; } = new List<Invoice>();
     }
 }

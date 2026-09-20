@@ -1,6 +1,7 @@
 ﻿using CRM.DAL.DTO.Response.Customers;
 using CRM.DAL.DTO.Response.Leads;
 using CRM.DAL.DTO.Response.Opportunities;
+using CRM.DAL.DTO.Response.Sales;
 using CRM.DAL.Models;
 using Mapster;
 using System;
@@ -15,7 +16,7 @@ namespace CRM.BLL.Mapping
     {
         public static void MapsterConfigRegister()
         {
-            TypeAdapterConfig.GlobalSettings.Default.PreserveReference(true);
+            //TypeAdapterConfig.GlobalSettings.Default.PreserveReference(true);
 
             TypeAdapterConfig<Lead, LeadResponse>.NewConfig()
                 .Map(dest => dest.AssignedAgentName, src => src.AssignedAgent != null ? src.AssignedAgent.FullName : null);
@@ -26,6 +27,12 @@ namespace CRM.BLL.Mapping
             TypeAdapterConfig<Opportunity, OpportunityResponse>.NewConfig()
                 .Map(dest => dest.AssignedAgentName, src => src.AssignedAgent != null ? src.AssignedAgent.FullName : null)
                 .Map(dest=> dest.CustomerName, src => src.Customer != null ? src.Customer.FullName : null);
+
+            TypeAdapterConfig<Sale, SaleResponse>.NewConfig()
+                .Map(dest => dest.AssignedAgentName, src => src.AssignedAgent != null ? src.AssignedAgent.FullName : null)
+                .Map(dest => dest.CustomerName, src => src.Customer != null ? src.Customer.FullName : null)
+                .Map(dest => dest.OpportunityTitle, src => src.Opportunity != null ? src.Opportunity.Title : null);
+
         }
     }
 }

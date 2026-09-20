@@ -3,6 +3,7 @@ using CRM.BLL.Service.Customers;
 using CRM.BLL.Service.Email;
 using CRM.BLL.Service.Leads;
 using CRM.BLL.Service.Opportunities;
+using CRM.BLL.Service.Sales;
 using CRM.DAL.Repository;
 using CRM.DAL.Utils;
 
@@ -18,7 +19,8 @@ namespace CRM.PL.Extensions
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<ILeadService, LeadService>();
             services.AddScoped<ICustomerService, CustomerService>();
-            services.AddScoped<IOpportunityService, OpportunityService>();  
+            services.AddScoped<IOpportunityService, OpportunityService>();
+            services.AddScoped<ISaleService, SaleService>();
             return services;
         }
     }
