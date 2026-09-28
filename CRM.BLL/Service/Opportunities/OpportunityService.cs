@@ -30,7 +30,7 @@ namespace CRM.BLL.Service.Opportunities
         {
             var opportunities = await _uow.Repository<Opportunity>().GetAllAsync(
                 includes: new string []{ nameof(Opportunity.Customer),
-                nameof(Opportunity.AssignedAgent)} );
+                nameof(Opportunity.AssignedAgent), nameof(Opportunity.Sale)} );
             return opportunities.Adapt<List<OpportunityResponse>>();
         }
 
@@ -103,7 +103,7 @@ namespace CRM.BLL.Service.Opportunities
                 return ServiceResult<bool>.Fail("Invalid stage value.");
 
             if (isClosed(opportunity.Stage))
-                return ServiceResult<bool>.Fail($"This opportunity is already {opportunity.Stage} and cannot change stage further");
+                return ServiceResult<bool>.Fail($"This opportunity is already {opportunity.Stage} and cannot change state further");
 
             if (request.Stage == OpportunityStageEnum.ClosedWon)
                 return ServiceResult<bool>.Fail("Use the dedicated close-won endpoint to mark an opportunity as won");

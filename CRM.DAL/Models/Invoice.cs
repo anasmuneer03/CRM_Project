@@ -23,9 +23,10 @@ namespace CRM.DAL.Models
         public InvoiceStatusEnum InvoiceStatus { get; set; } = InvoiceStatusEnum.Draft;
         public DateTime IssueDate { get; set; } = DateTime.UtcNow;
         public DateTime? DueDate { get; set; }
+        public string? Notes { get; set; }
         public int SaleId { get; set; }
         public Sale Sale { get; set; }
-        //payments: an invoice can be paid in full at once, or in multiple installments 
-        //public ICollection<Payment> Payments { get; set; } = new List<Payment>();
+        //payments: an invoice can be paid in full at once, or in multiple installments
+        public ICollection<Payment> Payments { get; set; } = new List<Payment>();
     }
 }

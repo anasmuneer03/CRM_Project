@@ -19,7 +19,7 @@ namespace CRM.DAL.Data
         public DbSet<Opportunity> Opportunities { get; set; }
         public DbSet<Sale> Sales { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
-        //public DbSet<Payment> Payments { get; set; }
+        public DbSet<Payment> Payments { get; set; }
         public DbSet<CrmTask> Tasks { get; set; }
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Note> Notes { get; set; }
@@ -117,11 +117,11 @@ namespace CRM.DAL.Data
                 .HasIndex(i => i.InvoiceNumber)
                 .IsUnique();
 
-            //builder.Entity<Payment>()
-            //    .HasOne(p => p.Invoice)
-            //    .WithMany(i => i.Payments)
-            //    .HasForeignKey(p => p.InvoiceId)
-            //    .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Payment>()
+                .HasOne(p => p.Invoice)
+                .WithMany(i => i.Payments)
+                .HasForeignKey(p => p.InvoiceId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<CrmTask>()
                 .HasOne(t => t.AssignedTo)

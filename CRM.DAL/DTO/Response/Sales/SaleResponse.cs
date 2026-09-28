@@ -1,4 +1,5 @@
-﻿using CRM.DAL.Models;
+﻿using CRM.DAL.DTO.Response.Invoices;
+using CRM.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,6 @@ namespace CRM.DAL.DTO.Response.Sales
         public string? AssignedAgentName { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime? UpdatedOn { get; set; }
-        public ICollection<Invoice>? Invoices { get; set; } 
+        public List<InvoiceResponse>? Invoices { get; set; } 
     }
 }

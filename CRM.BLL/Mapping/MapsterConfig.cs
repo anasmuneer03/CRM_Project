@@ -1,4 +1,5 @@
 ﻿using CRM.DAL.DTO.Response.Customers;
+using CRM.DAL.DTO.Response.Invoices;
 using CRM.DAL.DTO.Response.Leads;
 using CRM.DAL.DTO.Response.Opportunities;
 using CRM.DAL.DTO.Response.Sales;
@@ -32,6 +33,9 @@ namespace CRM.BLL.Mapping
                 .Map(dest => dest.AssignedAgentName, src => src.AssignedAgent != null ? src.AssignedAgent.FullName : null)
                 .Map(dest => dest.CustomerName, src => src.Customer != null ? src.Customer.FullName : null)
                 .Map(dest => dest.OpportunityTitle, src => src.Opportunity != null ? src.Opportunity.Title : null);
+
+            TypeAdapterConfig<Invoice, InvoiceResponse>.NewConfig()
+                .Map(dest => dest.Currancy, src => src.Sale != null ? src.Sale.Currancy : CurrancyEnum.JOD);
 
         }
     }

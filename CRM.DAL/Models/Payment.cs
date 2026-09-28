@@ -21,13 +21,18 @@ namespace CRM.DAL.Models
         Failed = 3,
         Refunded = 4
     }
-    public class Payment
+    public class Payment :AuditableEntity
     {
         public int Id { get; set; }
+
         public decimal Amount { get; set; }
+
         public DateTime PaymentDate { get; set; } = DateTime.UtcNow;
         public PaymentMethodEnum PaymentMethod { get; set; }
         public PaymentStatusEnum PaymentStatus { get; set; } = PaymentStatusEnum.Pending;
+        public string? ReferenceNumber { get; set; }
+        public string? Notes { get; set; }
+
         public int InvoiceId { get; set; }
         public Invoice Invoice { get; set; }
     }
