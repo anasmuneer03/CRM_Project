@@ -1,8 +1,10 @@
-﻿using CRM.BLL.Service.Authentication;
+﻿using CRM.BLL.Common.CurrentUser;
+using CRM.BLL.Service.Authentication;
 using CRM.BLL.Service.Customers;
 using CRM.BLL.Service.Email;
 using CRM.BLL.Service.Invoices;
 using CRM.BLL.Service.Leads;
+using CRM.BLL.Service.Notes;
 using CRM.BLL.Service.Opportunities;
 using CRM.BLL.Service.Sales;
 using CRM.DAL.Repository;
@@ -23,6 +25,8 @@ namespace CRM.PL.Extensions
             services.AddScoped<IOpportunityService, OpportunityService>();
             services.AddScoped<ISaleService, SaleService>();
             services.AddScoped<IInvoiceService, InvoiceService>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddScoped<INoteService, NoteService>();
             return services;
         }
     }

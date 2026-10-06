@@ -1,6 +1,7 @@
 ﻿using CRM.DAL.DTO.Response.Customers;
 using CRM.DAL.DTO.Response.Invoices;
 using CRM.DAL.DTO.Response.Leads;
+using CRM.DAL.DTO.Response.Notes;
 using CRM.DAL.DTO.Response.Opportunities;
 using CRM.DAL.DTO.Response.Sales;
 using CRM.DAL.Models;
@@ -36,6 +37,9 @@ namespace CRM.BLL.Mapping
 
             TypeAdapterConfig<Invoice, InvoiceResponse>.NewConfig()
                 .Map(dest => dest.Currancy, src => src.Sale != null ? src.Sale.Currancy : CurrancyEnum.JOD);
+
+            TypeAdapterConfig<Note, NoteResponse>.NewConfig()
+                .Map(dest=> dest.CreatedByName, src=> src.CreatedBy.FullName);
 
         }
     }
