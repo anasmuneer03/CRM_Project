@@ -1,5 +1,6 @@
 ﻿using CRM.BLL.Common.CurrentUser;
 using CRM.BLL.Service.Authentication;
+using CRM.BLL.Service.CrmTasks;
 using CRM.BLL.Service.Customers;
 using CRM.BLL.Service.Email;
 using CRM.BLL.Service.Invoices;
@@ -27,6 +28,7 @@ namespace CRM.PL.Extensions
             services.AddScoped<IInvoiceService, InvoiceService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<INoteService, NoteService>();
+            services.AddScoped<ICrmTaskService, CrmTaskService>();
             return services;
         }
     }

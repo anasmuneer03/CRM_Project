@@ -1,4 +1,5 @@
-﻿using CRM.DAL.DTO.Response.Customers;
+﻿using CRM.DAL.DTO.Response.CrmTasks;
+using CRM.DAL.DTO.Response.Customers;
 using CRM.DAL.DTO.Response.Invoices;
 using CRM.DAL.DTO.Response.Leads;
 using CRM.DAL.DTO.Response.Notes;
@@ -40,6 +41,12 @@ namespace CRM.BLL.Mapping
 
             TypeAdapterConfig<Note, NoteResponse>.NewConfig()
                 .Map(dest=> dest.CreatedByName, src=> src.CreatedBy.FullName);
+
+            TypeAdapterConfig<CrmTask, CrmTaskResponse>.NewConfig()
+                .Map(dest => dest.CreatedByName, src => src.CreatedBy != null ? src.CreatedBy.FullName : string.Empty)
+                .Map(dest => dest.AssignedToName, src => src.AssignedTo != null ? src.AssignedTo.FullName : null)
+                .Map(dest => dest.PriorityDisplay, src => src.Priority.ToString())
+                .Map(dest => dest.StatusDisplay, src => src.Status.ToString());
 
         }
     }
